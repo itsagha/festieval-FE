@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -5,11 +6,28 @@
   --foreground: #171717;
 }
 
+html {
+  scroll-behavior: smooth;
+  font-family: "inter", sans-serif;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-primary: #D5FB9C;
+  --animate-fade-in-scale: fade-in-scale 0.5s ease-in-out;
+  @keyframes fade-in-scale {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +40,56 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "inter", sans-serif;
+}
+
+/* animasi hover btn */
+.hoverAnimation1 {
+  transition: transform 0.7s ease, background-color 0.7s ease, color 0.7s ease;
+}
+
+.hoverAnimation1:hover {
+  transform: scale(1.01);
+  background-color: #D5FB9C;
+  color: black;
+}
+
+.animate-fade-in-scale {
+  animation: var(--animate-fade-in-scale);
+}
+
+/* animasi underline hover */
+.underline-hover {
+  @apply relative p-1;
+}
+
+.underline-hover::after {
+  content: '';
+  position: absolute;
+  height: 2px;
+  width: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #D5FB9C; 
+  transition: width 0.3s ease;
+}
+
+.underline-hover:hover::after {
+  width: 100%;
+}
+
+/* Scroll Bar CSS */
+::-webkit-scrollbar {
+  width: 18px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent; /* light mode */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #D5FB9C;
+  border-radius: 20px;
+  border: 7px solid transparent;
+  background-clip: content-box;
 }
