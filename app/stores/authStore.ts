@@ -1,0 +1,26 @@
+// nyimpen token
+import { create } from "zustand";
+
+interface AuthState {
+  token: string | null;
+  setToken: (token: string | null) => void;
+  clearToken: () => void;
+}
+
+export const useAuthStore = create<AuthState>((set) => ({
+  token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
+
+  setToken: (token) => {
+    set({ token });
+    if (token) {
+      localStorage.setItem("token", token);
+    } else {
+      localStorage.removeItem("token");
+    }
+  },
+
+  clearToken: () => {
+    set({ token: null });
+    localStorage.removeItem("token");
+  },
+}));

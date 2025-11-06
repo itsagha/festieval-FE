@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@/services/authServices";
 import Button from "@/components/ui/Button";
-import Link from "next/link";
+import RegisterModal from "@/components/auth/RegisterModal";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -12,6 +12,7 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,69 +42,85 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      {error && (
-        <p className="text-red-500 text-sm rounded">{error}</p>
-      )}
-
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="p-3 text-sm border border-gray-400 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary"
-        required
-      />
-
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="p-3 text-sm border border-gray-400 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary"
-        required
-      />
-
-      <p className="text-xs text-end">Forget password?</p>
-      <Button
-        variant="border border-primary text-primary hover:text-black"
-        disabled={loading}
-        className="mt-2"
-      >
-        {loading ? "Loading..." : "Sign In"}
-      </Button>
-
-      {/* garis or sign in with */}
-      <div className="flex items-center gap-3 text-xs">
-        <span className="flex-1 h-px bg-gray-300"></span>
-        <p className="whitespace-nowrap">or sign in with</p>
-        <span className="flex-1 h-px bg-gray-300"></span>
+    <>
+      <div className="flex flex-col md:flex-row md:gap-20 justify-center items-center min-h-screen">
+        <img
+          src="/images/essentials/logo.png"
+          alt="Logo"
+          className="md:w-xl"
+        />
+  
+        {/* Main container */}
+        <div className="flex flex-col gap-4 p-6 sm:p-8 w-full max-w-lg">
+          <h1 className="text-2xl md:text-start text-center font-extrabold">Festieval</h1>
+          <h1 className="hidden md:block text-justify">Event Management & Ticketing</h1>
+  
+          {error && <p className="text-red-500 text-sm rounded">{error}</p>}
+  
+          {/* Tombol Login Google */}
+          <Button 
+            className="flex justify-center items-center gap-2 bg-white text-black"
+            onClick={() => window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/auth/google`}  
+          >
+            <img src="/images/auth/google.png" alt="" className="w-4 h-4" />
+            Login dengan Google
+          </Button>
+  
+          {/* garis */}
+          <div className="flex items-center gap-3 text-xs">
+            <span className="flex-1 h-px bg-gray-300"></span>
+            <p className="whitespace-nowrap">atau</p>
+            <span className="flex-1 h-px bg-gray-300"></span>
+          </div>
+  
+          {/* Form login */}
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="p-3 text-sm border border-gray-400 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary"
+              required
+            />
+  
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="p-3 text-sm border border-gray-400 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary"
+              required
+            />
+  
+            <p className="text-xs text-end">Lupa password?</p>
+  
+            <Button
+              variant="bg-primary text-black"
+              disabled={loading}
+              className="mt-2"
+            >
+              {loading ? "Loading..." : "Login"}
+            </Button>
+          </form>
+  
+          <p className="text-center text-xs mt-2">
+            Belum punya akun?
+            <span className="font-semibold ml-1">
+              <button
+                className="underline cursor-pointer"
+                onClick={() => setIsOpen(true)}
+              >
+                Buat Sekarang
+              </button>
+            </span>
+          </p>
+        </div>
       </div>
-
-      {/* social login icons */}
-      <div className="flex justify-center gap-2">
-        <Link
-          href="https://google.com"
-          className="flex items-center justify-center w-10 h-10 bg-white rounded-lg hover:bg-gray-300 transition-all duration-500"
-        >
-          <img
-            src="/images/auth/google.png"
-            alt="Google"
-            className="w-5 h-5 object-contain"
-          />
-        </Link>
-        <Link
-          href="https://instagram.com"
-          className="flex items-center justify-center w-10 h-10 bg-white rounded-lg hover:bg-gray-300 transition-all duration-500"
-        >
-          <img
-            src="/images/auth/instagram.png"
-            alt="Instagram"
-            className="w-5 h-5 object-contain"
-          />
-        </Link>
-      </div>
-      <p className="text-center text-xs">Doesn't have an account? <span className="font-bold underline"><Link href="/auth/register">Create now</Link></span></p>
-    </form>
+  
+      {/* Modal Register */}
+      <RegisterModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+    </>
   );
+  
 }

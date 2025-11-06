@@ -23,7 +23,7 @@ export default function Home() {
       {!isLoggedIn ? (
         <>
           <p className="text-gray-300">
-            Anda belum login, silahkan klik salah satu tombol di bawah ini
+            Anda belum login, silahkan klik tombol di bawah ini
           </p>
           <div className="flex justify-center gap-6 mt-6">
             <Link
@@ -31,12 +31,6 @@ export default function Home() {
               href="/auth/login"
             >
               Login
-            </Link>
-            <Link
-              className="underline-hover"
-              href="/auth/register"
-            >
-              Register
             </Link>
           </div>
         </>

@@ -11,7 +11,7 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({
   children,
   onClick,
-  variant = "bg-primary text-black",
+  variant = "",
   className = "",
   disabled = false,
 }) => {
@@ -19,21 +19,13 @@ const Button: React.FC<ButtonProps> = ({
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`relative overflow-hidden px-5 py-2 rounded-lg text-sm
-        transition-all duration-500 ease-out
+      className={`px-4 py-3 rounded-xl text-sm font-medium
+        duration-500 ease-in-out hover:scale-102 
         ${variant} ${className}
-        ${disabled ? "opacity-50 cursor-not-allowed pointer-events-none" : "cursor-pointer"}
-        group
+        ${disabled ? "opacity-50 cursor-not-allowed pointer-events-none" : "cursor-pointer hover:shadow-md"}
       `}
     >
-      {/* Background slide animation */}
-      <span
-        className="absolute inset-0 bg-primary translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500 ease-in-out
-        "
-      ></span>
-
-      {/* Button text */}
-      <span className="relative z-10">{children}</span>
+      {children}
     </button>
   );
 };
