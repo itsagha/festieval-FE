@@ -1,31 +1,35 @@
-// biar bisa ambil token dmn aja
 "use client";
-
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/app/stores/authStore";
 
 interface AuthUser {
   token: string | null;
   role: string | null;
+  user: {
+    id?: number;
+    email?: string;
+    name?: string;
+    avatar?: string;
+  } | null;
 }
 
 export function useAuth(redirectToLogin = false): AuthUser {
   const router = useRouter();
-  const [auth, setAuth] = useState<AuthUser>({
-    token: null,
-    role: null,
-  });
+
+  const token = useAuthStore((state) => state.token);
+  const user = useAuthStore((state) => state.user);
+  const role = useAuthStore((state) => state.user?.role || null);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role");
-
     if (!token && redirectToLogin) {
       router.push("/auth/login");
-    } else {
-      setAuth({ token, role });
     }
-  }, [redirectToLogin, router]);
+  }, [token, redirectToLogin, router]);
 
-  return auth;
+  return {
+    token,
+    role,
+    user
+  };
 }

@@ -3,10 +3,9 @@ import OTPInput from "react-otp-input";
 import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import { verifyOTP } from "@/services/authServices";
-import { useAuthStore } from "@/app/stores/authStore";
 
 export default function RegisterStepOTP({ nextStep, prevStep }: any) {
-  const router = useRouter(); 
+  const router = useRouter();
   const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,26 +18,25 @@ export default function RegisterStepOTP({ nextStep, prevStep }: any) {
   const handleVerify = async () => {
     setError("");
     setLoading(true);
-  
+
     try {
       const otpId = localStorage.getItem("OTP_ID");
+
       if (!otpId) {
         setError("OTP ID tidak ditemukan. Silakan daftar ulang.");
         return;
       }
-  
+
       const payload = {
         otpId: Number(otpId),
         otp: otp,
       };
-  
+
       const res = await verifyOTP(payload);
-  
+
       if (res.access_token) {
-        // simpan dan zustand
-        useAuthStore.getState().setToken(res.access_token);
-  
         localStorage.removeItem("OTP_ID");
+
         nextStep();
         router.push("/");
       } else {
@@ -62,8 +60,8 @@ export default function RegisterStepOTP({ nextStep, prevStep }: any) {
         shouldAutoFocus
         renderInput={({ style, ...props }) => (
           <input
-            {...props} 
-            style={{}} // kosongin style bawaan biar gak override tailwindf
+            {...props}
+            style={{}}
             maxLength={1}
             className="w-10 h-10 sm:w-12 sm:h-12 text-center rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary text-lg bg-white text-gray-700"
             onInput={(e: any) => {

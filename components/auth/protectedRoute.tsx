@@ -1,6 +1,4 @@
-// validasi role, kalo belom login, biar ga asal masuk dengan typing di URL nya
 "use client";
-
 import { ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -15,8 +13,7 @@ export default function ProtectedRoute({
 }: ProtectedRouteProps) {
   const { token, role } = useAuth(true);
 
-  // nunggu dapet token, kasih loading
-  if (!token) {
+  if (token === null) {
     return (
       <div className="flex items-center justify-center min-h-screen text-gray-500">
         Checking authentication...
@@ -24,11 +21,10 @@ export default function ProtectedRoute({
     );
   }
 
-  // Cek role kalau dibatasi
   if (allowedRoles && !allowedRoles.includes(role || "")) {
     return (
       <div className="flex items-center justify-center min-h-screen text-red-500">
-        Access Denied
+        Access Denied. Required role: {allowedRoles.join(", ")}
       </div>
     );
   }

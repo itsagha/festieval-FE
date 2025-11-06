@@ -1,20 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
 import { logoutUser } from "@/services/authServices";
+import { useAuthStore } from "@/app/stores/authStore";
 
 export default function Home() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const token = useAuthStore((state) => state.token);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, []);
+  const isLoggedIn = !!token;
 
   return (
     <div className="max-w-7xl mx-auto text-center py-20">
@@ -26,12 +18,9 @@ export default function Home() {
             Anda belum login, silahkan klik tombol di bawah ini
           </p>
           <div className="flex justify-center gap-6 mt-6">
-            <Link
-              className="underline-hover"
-              href="/auth/login"
-            >
+            <a className="underline-hover" href="/auth/login">
               Login
-            </Link>
+            </a>
           </div>
         </>
       ) : (

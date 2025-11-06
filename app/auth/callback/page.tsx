@@ -1,12 +1,13 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "@/services/api";
+import { decodeJWT, useAuthStore } from "@/app/stores/authStore";
 
 export default function AuthCallback() {
   const router = useRouter();
   const [status, setStatus] = useState("Memproses login...");
+  const setAuth = useAuthStore((state) => state.setAuth);
 
   useEffect(() => {
     const handleGoogleCallback = async () => {
@@ -26,7 +27,6 @@ export default function AuthCallback() {
         }
 
         setStatus("Mendapatkan google credentials...");
-
         const response = await api.post('/auth/oauth/exchange', {
           session_id: sessionId,
         });
@@ -37,35 +37,26 @@ export default function AuthCallback() {
           throw new Error("Invalid tokens received");
         }
 
-        localStorage.setItem("token", access_token);
-        localStorage.setItem("refresh_token", refresh_token);
-
         const payload = decodeJWT(access_token);
-        if (payload) {
-          if (payload.role) {
-            localStorage.setItem("role", payload.role);
-          }
-          if (payload.email) {
-            localStorage.setItem("email", payload.email);
-          }
-          if (payload.name) {
-            localStorage.setItem("name", payload.name);
-          }
-        }
+
+        setAuth(access_token, refresh_token, {
+          id: payload?.sub,
+          email: payload?.email,
+          name: payload?.name,
+          role: payload?.role,
+        });
 
         window.history.replaceState({}, '', '/auth/callback');
-
         setStatus("Berhasil login...");
 
         setTimeout(() => {
-          const role = localStorage.getItem("role");
+          const role = useAuthStore.getState().getRole();
           if (role === "organizer") {
             router.push("/dashboard");
           } else {
             router.push("/");
           }
         }, 1000);
-
       } catch (err: any) {
         console.error("Google OAuth callback error:", err);
         setStatus(err.response?.data?.message || "Login failed");
@@ -74,7 +65,7 @@ export default function AuthCallback() {
     };
 
     handleGoogleCallback();
-  }, [router]);
+  }, [router, setAuth]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen gap-4">
@@ -82,21 +73,4 @@ export default function AuthCallback() {
       <p className="text-lg text-gray-700">{status}</p>
     </div>
   );
-}
-
-function decodeJWT(token: string): any {
-  try {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(
-      atob(base64)
-        .split('')
-        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-        .join('')
-    );
-    return JSON.parse(jsonPayload);
-  } catch (error) {
-    console.error('Failed to decode JWT:', error);
-    return null;
-  }
 }
