@@ -27,17 +27,7 @@ export const verifyOTP = async (data: { otpId: number; otp: string }) => {
 
 // buat login dgn google
 export const refreshAccessToken = async () => {
-  const REFRESH_URL = process.env.NEXT_PUBLIC_REFRESH_TOKEN_URL!;
-  console.log("REFRESH_URL:", REFRESH_URL);
-
-  const res = await fetch(REFRESH_URL, {
-    method: "GET",
-    credentials: "include",
-  });
-
-  if (!res.ok) throw new Error("Gagal refresh token");
-
-  const data = await res.json();
-  console.log("Response refresh:", data);
-  return data;
+  const REFRESH_URL = process.env.NEXT_PUBLIC_REFRESH_TOKEN_URL || "/auth/refresh";
+  const res = await api.get(REFRESH_URL);
+  return res.data;
 };

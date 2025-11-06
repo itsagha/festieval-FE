@@ -60,7 +60,7 @@ export default function LoginForm() {
           {/* Tombol Login Google */}
           <Button
             className="flex justify-center items-center gap-2 bg-white text-black"
-            onClick={() => window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}auth/google`}
+            onClick={() => window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/auth/google`}
           >
             <img src="/images/auth/google.png" alt="" className="w-4 h-4" />
             Login dengan Google
