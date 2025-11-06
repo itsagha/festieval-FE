@@ -20,8 +20,8 @@ interface AuthState {
   setAuth: (token: string, refreshToken: string, user: User) => void;
   logout: () => void;
 
+  getUser: () => User | null;
   isAuthenticated: () => boolean;
-  getRole: () => string | undefined;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -45,7 +45,7 @@ export const useAuthStore = create<AuthState>()(
 
       isAuthenticated: () => !!get().token,
 
-      getRole: () => get().user?.role,
+      getUser: () => get().user,
     }),
     {
       name: 'auth-storage',
