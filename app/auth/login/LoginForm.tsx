@@ -29,10 +29,10 @@ export default function LoginForm() {
       // arahin ke page tergantung role
       if (res.role === "buyer") {
         router.push("/");
-      } else if (res.role === "seller") {
+      } else if (res.role === "organizer") {
         router.push("/");
       } else {
-        router.push("/"); 
+        router.push("/");
       }
     } catch (err: any) {
       setError(err.response?.data?.message || "Failed logging in, try again later");
@@ -49,30 +49,30 @@ export default function LoginForm() {
           alt="Logo"
           className="md:w-xl"
         />
-  
+
         {/* Main container */}
         <div className="flex flex-col gap-4 p-6 sm:p-8 w-full max-w-lg">
           <h1 className="text-2xl md:text-start text-center font-extrabold">Festieval</h1>
           <h1 className="hidden md:block text-justify">Event Management & Ticketing</h1>
-  
+
           {error && <p className="text-red-500 text-sm rounded">{error}</p>}
-  
+
           {/* Tombol Login Google */}
-          <Button 
+          <Button
             className="flex justify-center items-center gap-2 bg-white text-black"
-            onClick={() => window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/auth/google`}  
+            onClick={() => window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}auth/google`}
           >
             <img src="/images/auth/google.png" alt="" className="w-4 h-4" />
             Login dengan Google
           </Button>
-  
+
           {/* garis */}
           <div className="flex items-center gap-3 text-xs">
             <span className="flex-1 h-px bg-gray-300"></span>
             <p className="whitespace-nowrap">atau</p>
             <span className="flex-1 h-px bg-gray-300"></span>
           </div>
-  
+
           {/* Form login */}
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <input
@@ -83,7 +83,7 @@ export default function LoginForm() {
               className="p-3 text-sm border border-gray-400 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary"
               required
             />
-  
+
             <input
               type="password"
               placeholder="Password"
@@ -92,9 +92,9 @@ export default function LoginForm() {
               className="p-3 text-sm border border-gray-400 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary"
               required
             />
-  
+
             <p className="text-xs text-end">Lupa password?</p>
-  
+
             <Button
               variant="bg-primary text-black"
               disabled={loading}
@@ -103,7 +103,7 @@ export default function LoginForm() {
               {loading ? "Loading..." : "Login"}
             </Button>
           </form>
-  
+
           <p className="text-center text-xs mt-2">
             Belum punya akun?
             <span className="font-semibold ml-1">
@@ -117,10 +117,10 @@ export default function LoginForm() {
           </p>
         </div>
       </div>
-  
+
       {/* Modal Register */}
       <RegisterModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </>
   );
-  
+
 }
