@@ -1,5 +1,5 @@
-// nyimpen token
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 interface AuthState {
   token: string | null;
@@ -7,20 +7,15 @@ interface AuthState {
   clearToken: () => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  token: typeof window !== "undefined" ? localStorage.getItem("token") : null,
-
-  setToken: (token) => {
-    set({ token });
-    if (token) {
-      localStorage.setItem("token", token);
-    } else {
-      localStorage.removeItem("token");
+export const useAuthStore = create(
+  persist<AuthState>(
+    (set) => ({
+      token: null,
+      setToken: (token) => set({ token }),
+      clearToken: () => set({ token: null }),
+    }),
+    {
+      name: "auth-store",
     }
-  },
-
-  clearToken: () => {
-    set({ token: null });
-    localStorage.removeItem("token");
-  },
-}));
+  )
+);
