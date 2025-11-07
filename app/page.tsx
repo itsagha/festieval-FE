@@ -2,14 +2,17 @@
 
 import { logoutUser } from "@/services/authServices";
 import { useAuthStore } from "@/app/stores/authStore";
+import Button from "@/components/ui/Button";
+import Link from "next/link";
 
 export default function Home() {
   const isLoggedIn = useAuthStore((state) => state.isAuthenticated());
   const user = useAuthStore((state) => state.getUser());
 
   return (
-    <div className="max-w-7xl mx-auto text-center py-20">
+    <div className="max-w-7xl mx-auto text-center py-28">
       <h1 className="text-2xl font-bold mb-4">Home Page</h1>
+      <h1 className="text-2xl font-bold mb-4">Nonton seru, ga pake drama!</h1>
 
       {!isLoggedIn ? (
         <>
@@ -26,12 +29,22 @@ export default function Home() {
         <>
           <p className="">Anda sudah login</p>
           <p className="">{user?.name}</p>
-          <button
-            onClick={logoutUser}
-            className="mt-6 px-6 py-2 bg-red-500 text-white rounded-lg hover:scale-102 transition-transform duration-500"
-          >
-            Logout
-          </button>
+          <p>{user?.role}</p>
+          <div className="flex justify-center items-center gap-4 mt-6">
+            <Button
+              onClick={logoutUser}
+              className="border border-danger text-danger hover:bg-danger hover:text-white"
+            >
+              Logout
+            </Button>
+            <Link href="/organizer">
+              <Button
+                className="border border-primary text-primary hover:bg-primary hover:text-black hover:opacity-90"
+                >
+                Organizer Dashboard
+              </Button>
+            </Link>
+          </div>
         </>
       )}
     </div>

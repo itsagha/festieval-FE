@@ -69,20 +69,28 @@ export const verifyOTP = async (data: { otpId: number; otp: string }) => {
   return res.data;
 };
 
+// login pake akun google
 export const refreshAccessToken = async () => {
   const REFRESH_URL = process.env.NEXT_PUBLIC_REFRESH_TOKEN_URL || "/auth/refresh";
-
   const refreshToken = useAuthStore.getState().refreshToken;
-
   const res = await api.post(REFRESH_URL, {
     refresh_token: refreshToken
   });
-
   const { access_token } = res.data;
-
   if (access_token) {
     useAuthStore.getState().setToken(access_token);
   }
 
   return res.data;
+};
+
+// switch role (auto dr backend)
+export const switchRole = async () => {
+  try {
+    const res = await api.post("/auth/switch-role");
+    return res.data;
+  } catch (err: any) {
+    console.error("Gagal switch role:", err.response?.data || err.message);
+    throw err;
+  }
 };

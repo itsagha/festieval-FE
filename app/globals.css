@@ -17,6 +17,7 @@ html {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --color-primary: #D5FB9C;
+  --color-danger: #fb2c36;
   --animate-fade-in-scale: fade-in-scale 0.5s ease-in-out;
   @keyframes fade-in-scale {
     0% {
@@ -51,6 +52,15 @@ body {
 .hoverAnimation1:hover {
   transform: scale(1.01);
   background-color: #D5FB9C;
+  color: black;
+}
+
+.hoverAnimationDanger {
+  transition: transform 0.7s ease, background-color 0.7s ease, color 0.7s ease;
+}
+
+.hoverAnimationDanger:hover {
+  background-color: #fb2c36;
   color: black;
 }
 
@@ -92,4 +102,20 @@ body {
   border-radius: 20px;
   border: 7px solid transparent;
   background-clip: content-box;
+}
+
+/* animasi slidedown navbar */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.25s ease-in-out forwards;
 }
