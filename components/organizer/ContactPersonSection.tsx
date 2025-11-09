@@ -41,11 +41,12 @@ export default function ContactPersonSection() {
       <div>
         <h3 className='font-semibold mb-2'>No. Ponsel</h3>
         <div className="flex items-center justify-between gap-2">
-          <div className="rounded-lg text-gray-600 p-2.5 bg-white">
+          <div className="rounded-lg text-gray-600 p-3 bg-white text-sm">
             <p>+62</p>
           </div>
           <input
             type="number"
+            placeholder="81234567890"
             value={numberCP}
             onChange={(e) => setNumberCP(e.target.value)}
             className="p-3 text-gray-600 text-sm bg-white rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-primary"

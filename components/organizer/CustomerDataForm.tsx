@@ -12,7 +12,7 @@ export default function CustomerDataForm() {
       <h2 className="text-xl font-bold mb-2">Formulir Data Pemesan</h2>
 
       {/* maks tiket per transaksi */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center gap-2 justify-between">
         Jumlah maksimum tiket per transaksi
         <Dropdown
           label={selected}
@@ -27,13 +27,13 @@ export default function CustomerDataForm() {
       </div>
 
       {/* 1 email u/ 1 transaksi */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center gap-2 justify-between">
         1 akun email hanya untuk 1 kali transaksi
         <SwitchButton />
       </div>
 
       {/* 1 tiket u/ 1 data pemesan */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center gap-2 justify-between">
         1 tiket hanya untuk 1 data pemesan
         <SwitchButton />
       </div>

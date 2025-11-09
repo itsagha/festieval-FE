@@ -17,18 +17,13 @@ export default function Home() {
       {!isLoggedIn ? (
         <>
           <p className="text-gray-300">
-            Anda belum login, silahkan klik tombol di bawah ini
+            Anda belum login, silahkan login terlebih dahulu
           </p>
-          <div className="flex justify-center gap-6 mt-6">
-            <a className="underline-hover" href="/auth/login">
-              Login
-            </a>
-          </div>
         </>
       ) : (
         <>
-          <p className="">Anda sudah login</p>
-          <p className="">{user?.name}</p>
+          <p>Anda sudah login</p>
+          <p>{user?.name}</p>
           <p>{user?.role}</p>
           <div className="flex justify-center items-center gap-4 mt-6">
             <Button
