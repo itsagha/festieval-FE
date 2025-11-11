@@ -88,6 +88,24 @@ export const refreshAccessToken = async () => {
 export const switchRole = async () => {
   try {
     const res = await api.post("/auth/switch-role");
+    const { access_token, refresh_token, user } = res.data;
+
+    if (access_token) {
+      const jwtPayload = decodeJWT(access_token);
+
+      useAuthStore.getState().setAuth(
+        access_token,
+        refresh_token || '',
+        {
+          id: user?.id || jwtPayload?.sub,
+          email: user?.email || jwtPayload?.email,
+          name: user?.name || jwtPayload?.name,
+          role: user?.role || jwtPayload?.role,
+          avatar: user?.avatar,
+        }
+      );
+    }
+
     return res.data;
   } catch (err: any) {
     console.error("Gagal switch role:", err.response?.data || err.message);
