@@ -4,32 +4,44 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useAuthStore } from "@/app/stores/authStore";
 import SearchBar from "../ui/SearchBar";
-import { Ticket, Compass, CircleUserRound, Menu, X, Home } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Ticket, Compass, CircleUserRound, Home, Repeat2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { switchRole } from "@/services/authServices";
 
 export default function BuyerNavbar() {
   const user = useAuthStore((state) => state.user);
   const [scrolled, setScrolled] = useState(false);
+  const [isSwitching, setIsSwitching] = useState(false);
 
-  // ganti background saat scroll
+  // Ganti background saat scroll
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleSwitchRole = async () => {
+    try {
+      setIsSwitching(true);
+      await switchRole();
+      window.location.reload();
+    } catch (err) {
+    } finally {
+      setIsSwitching(false);
+    }
+  };
+
   return (
     <>
-      {/* desktop navbar */}
+      {/* Desktop Navbar */}
       <nav
-        className={`fixed top-0 left-0 w-full z-50 hidden md:block ${
-          scrolled
-            ? "bg-black/50 shadow-md backdrop-blur-md"
-            : "bg-transparent backdrop-blur-sm"
-        }`}
+        className={`fixed top-0 left-0 w-full z-50 hidden md:block ${scrolled
+          ? "bg-black/50 shadow-md backdrop-blur-md"
+          : "bg-transparent backdrop-blur-sm"
+          }`}
       >
         <div className="flex items-center justify-between px-6 py-2 max-w-360 mx-auto">
-          {/* logo & search */}
+          {/* Logo & Search */}
           <div className="flex items-center gap-4 flex-1">
             <Link href="/" className="flex items-center gap-2">
               <img
@@ -44,10 +56,10 @@ export default function BuyerNavbar() {
             </div>
           </div>
 
-          {/* menu desktop */}
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium">
+          {/* Menu Desktop */}
+          <div className="hidden md:flex items-center gap-6 text-sm font-medium">
             <NavItem
-              href="/"
+              href="/explore"
               icon={<Compass className="w-5 h-5 text-primary" />}
               label="Jelajah Event"
             />
@@ -61,16 +73,42 @@ export default function BuyerNavbar() {
               icon={<CircleUserRound className="w-5 h-5 text-primary" />}
               label={user?.name || "Login"}
             />
+
+            {/* Tombol Ganti Role */}
+            {user && (
+              <button
+                onClick={handleSwitchRole}
+                disabled={isSwitching}
+                className="flex items-center gap-2 border border-primary text-primary px-3 py-1 rounded-md hover:bg-primary hover:text-black transition"
+              >
+                <Repeat2 className="w-4 h-4" />
+                {isSwitching ? "Mengganti..." : "Ganti Role"}
+              </button>
+            )}
           </div>
         </div>
       </nav>
 
-      {/* Mobile navbar */}
+      {/* Mobile Navbar */}
       <div className="fixed bottom-0 left-0 w-full bg-black/50 backdrop-blur-sm border-t border-gray-700 flex justify-around py-6 md:hidden z-50">
         <BottomNavIcon href="/" icon={<Home className="w-6 h-6 text-primary" />} />
         <BottomNavIcon href="/explore" icon={<Compass className="w-6 h-6 text-primary" />} />
         <BottomNavIcon href="/orders" icon={<Ticket className="w-6 h-6 text-primary" />} />
         <BottomNavIcon href={user ? "#" : "/auth/login"} icon={<CircleUserRound className="w-6 h-6 text-primary" />} />
+
+        {/* Ganti Role Mobile */}
+        {user && (
+          <motion.div whileTap={{ scale: 0.9 }}>
+            <button
+              onClick={handleSwitchRole}
+              disabled={isSwitching}
+              className="flex flex-col items-center justify-center text-gray-400 hover:text-primary transition"
+            >
+              <Repeat2 className="w-6 h-6 text-primary" />
+              <span className="text-xs mt-1">{isSwitching ? "..." : "Ganti"}</span>
+            </button>
+          </motion.div>
+        )}
       </div>
     </>
   );
