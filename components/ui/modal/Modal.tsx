@@ -39,7 +39,7 @@ const Modal: React.FC<ModalProps> = ({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 50, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className={`${variantBG} w-full max-w-md rounded-2xl shadow-xl p-6 relative mx-4 md:mx-0`}
+            className={`${variantBG} w-full max-w-md rounded-2xl shadow-xl p-6 relative mx-4 md:mx-0 `}
           >
             {/* Header */}
             <div className="flex justify-between items-center mb-4">

@@ -52,7 +52,7 @@ export default function AuthCallback() {
         setTimeout(() => {
           const role = useAuthStore.getState().getRole();
           if (role === "organizer") {
-            router.push("/dashboard");
+            router.push("/organizer/dashboard");
           } else {
             router.push("/");
           }

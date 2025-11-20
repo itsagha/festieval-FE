@@ -9,8 +9,6 @@ export default function ContactPersonSection() {
 
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-xl font-bold">Informasi Contact Person</h2>
-
       {/* narahubung */}
       <div>
         <h3 className='font-semibold mb-2'>Narahubung</h3>

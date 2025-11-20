@@ -1,6 +1,6 @@
 "use client"
 
-import Dropdown from "../ui/Dropdown"
+import Dropdown from "../ui/dropdown/Dropdown";
 import SwitchButton from "../ui/SwitchButton"
 import { useState } from "react";
 

@@ -32,10 +32,10 @@ export default function Home() {
             >
               Logout
             </Button>
-            <Link href="/organizer">
+            <Link href="/organizer/dashboard">
               <Button
                 className="border border-primary text-primary hover:bg-primary hover:text-black hover:opacity-90"
-                >
+              >
                 Organizer Dashboard
               </Button>
             </Link>

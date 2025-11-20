@@ -36,7 +36,7 @@ export default function LoginForm() {
 
       const role = res.user?.role || payload?.role;
       if (role === "organizer") {
-        router.push("/dashboard");
+        router.push("/organizer/dashboard");
       } else {
         router.push("/");
       }

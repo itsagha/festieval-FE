@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Modal from "@/components/ui/Modal";
+import Modal from "../ui/modal/Modal";
 import RegisterStepOne from "./RegisterStepOne";
 import RegisterStepTwo from "./RegisterStepTwo";
 import RegisterStepOTP from "./RegisterStepOTP";

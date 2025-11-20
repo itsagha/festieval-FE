@@ -1,6 +1,7 @@
 import api from "./api";
 import { useAuthStore, decodeJWT } from "@/app/stores/authStore";
 
+// logout
 export function logoutUser() {
   useAuthStore.getState().logout();
 
@@ -11,6 +12,7 @@ export function logoutUser() {
   window.location.href = "/";
 }
 
+// login
 export const loginUser = async (payload: { email: string; password: string }) => {
   const LOGIN_URL = process.env.NEXT_PUBLIC_LOGIN_URL || "/auth/login";
   const res = await api.post(LOGIN_URL, payload);
@@ -34,6 +36,7 @@ export const loginUser = async (payload: { email: string; password: string }) =>
   return res.data;
 };
 
+// Bikin akun baru
 export const registerUser = async (payload: {
   name: string;
   email: string;
@@ -44,6 +47,7 @@ export const registerUser = async (payload: {
   return res.data;
 };
 
+// verif kode OTP
 export const verifyOTP = async (data: { otpId: number; otp: string }) => {
   const OTP_URL = process.env.NEXT_PUBLIC_OTP_URL || "/auth/verify-otp";
   const res = await api.post(OTP_URL, data);

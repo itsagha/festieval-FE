@@ -7,11 +7,13 @@ import SearchBar from "../ui/SearchBar";
 import { Ticket, Compass, CircleUserRound, Home, Repeat2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { switchRole } from "@/services/authServices";
+import { useRouter } from "next/navigation";
 
 export default function BuyerNavbar() {
   const user = useAuthStore((state) => state.user);
   const [scrolled, setScrolled] = useState(false);
   const [isSwitching, setIsSwitching] = useState(false);
+  const router = useRouter();
 
   // Ganti background saat scroll
   useEffect(() => {
@@ -23,9 +25,18 @@ export default function BuyerNavbar() {
   const handleSwitchRole = async () => {
     try {
       setIsSwitching(true);
-      await switchRole();
-      window.location.reload();
+  
+      const result = await switchRole();
+      const newRole = result?.user?.role;
+  
+      if (newRole === "buyer") {
+        router.push("/");
+      } else if (newRole === "organizer") {
+        router.push("/organizer/dashboard");
+      }
+  
     } catch (err) {
+      console.error("Error switching role:", err);
     } finally {
       setIsSwitching(false);
     }
@@ -40,7 +51,7 @@ export default function BuyerNavbar() {
           : "bg-transparent backdrop-blur-sm"
           }`}
       >
-        <div className="flex items-center justify-between px-6 py-2 max-w-360 mx-auto">
+        <div className="flex items-center justify-between px-4 py-2 max-w-360 mx-auto">
           {/* Logo & Search */}
           <div className="flex items-center gap-4 flex-1">
             <Link href="/" className="flex items-center gap-2">

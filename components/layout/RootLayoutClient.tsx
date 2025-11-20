@@ -1,11 +1,13 @@
 "use client";
-// buat hide BuyerNavbar.tsx di halaman login, regist, organizer
+
+// hide navbar buyer pas di folder organizer dan auth
 import { usePathname } from "next/navigation";
 import BuyerNavbar from "@/components/navbar/BuyerNavbar";
 
 export default function RootLayoutClient({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const hideNavbar = ["/auth/login", "/auth/callback", "/organizer"].includes(pathname);
+  const hideNavbar =
+    pathname.startsWith("/auth") || pathname.startsWith("/organizer");
 
   return (
     <>

@@ -15,7 +15,9 @@ export default function OrganizerLayout({ children }: { children: React.ReactNod
   return (
     <section>
       <OrganizerNavbar />
-      <main style={{ paddingTop: `${navHeight}px` }} className="max-w-360 mx-auto px-6 py-6">{children}</main>
+      <main style={{ paddingTop: `${navHeight}px` }} className="max-w-360 mx-auto px-4 py-8">
+        {children}
+      </main>
     </section>
   );
 }
