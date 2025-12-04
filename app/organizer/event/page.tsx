@@ -1,6 +1,6 @@
 "use client"
 
-import { CirclePlus, ChevronDown, CircleUserRound, Calendar, MapPin } from 'lucide-react'; 
+import { CirclePlus, CircleUserRound, Calendar, MapPin } from 'lucide-react'; 
 import { useState } from 'react';
 import { useAuthStore } from "@/app/stores/authStore";
 import Button from '@/components/ui/Button';

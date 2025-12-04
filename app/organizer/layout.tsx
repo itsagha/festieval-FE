@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import OrganizerNavbar from "@/components/navbar/OrganizerNavbar";
+import SidebarOrganizer from "@/components/sidebar/SidebarOrganizer";
 
 export default function OrganizerLayout({ children }: { children: React.ReactNode }) {
   const [navHeight, setNavHeight] = useState(0);
@@ -13,11 +13,14 @@ export default function OrganizerLayout({ children }: { children: React.ReactNod
   }, []);
 
   return (
-    <section>
-      <OrganizerNavbar />
-      <main style={{ paddingTop: `${navHeight}px` }} className="max-w-360 mx-auto px-4 py-8">
+    <div className="flex min-h-screen">
+      {/* Sidebar */}
+      <SidebarOrganizer />
+
+      {/* Content */}
+      <main className="md:ml-64 flex-1 mx-auto p-8">
         {children}
       </main>
-    </section>
+    </div>
   );
 }
