@@ -60,7 +60,7 @@ export default function page() {
             <div className="h-0.5 w-full rounded-full bg-gray-400/30 my-2"></div>
             <p className="text-gray-400 text-sm">Total</p>
             <div className="flex justify-between items-end">
-              <h2 className="text-5xl font-bold mt-4">{card.value}</h2>
+              <h2 className="text-2xl md:text-5xl font-bold mt-4">{card.value}</h2>
               <p className="text-gray-400 text-sm">{card.unit}</p>
             </div>
           </div>

@@ -5,9 +5,10 @@ import { switchRole, logoutUser } from "@/services/authServices"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import NavItem from "./NavItem"
-import Link from "next/link"
+import { useAuthStore } from "@/app/stores/authStore"
 
 export default function SidebarOrganizer() {
+  const user = useAuthStore((state) => state.getUser())
   const [isSwitching, setIsSwitching] = useState(false)
   const router = useRouter()
 
@@ -36,8 +37,8 @@ export default function SidebarOrganizer() {
       {/* info user */}
       <div className="flex justify-between rounded-xl bg-primary p-4">
         <div className="flex flex-col">
-          <h3 className="font-extrabold text-lg text-walnut">Annisa Syifaul</h3>
-          <p className="text-sm text-gray-500">Admin</p>
+          <h3 className="font-extrabold text-lg text-walnut">{user?.name}</h3>
+          <p className="text-sm text-gray-500">{user?.role}</p>
         </div>
 
         {/* photo profile */}
