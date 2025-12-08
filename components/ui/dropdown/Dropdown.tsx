@@ -26,7 +26,7 @@ export default function Dropdown({
   return (
     <div className={`relative inline-block text-${position} ${className}`}>
       <Menu>
-        <MenuButton className="inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-semibold text-white border border-white/10 hover:bg-gray-700 transition">
+        <MenuButton className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-white border border-white/10 hover:bg-gray-700 transition">
           {label}
           <ChevronDown className="size-4 fill-white/60" />
         </MenuButton>
@@ -34,7 +34,7 @@ export default function Dropdown({
         <MenuItems
           transition
           anchor={`bottom`}
-          className="w-48 origin-top-right rounded-xl border border-white/10 bg-black/50 backdrop-blur-sm p-1 text-sm text-white shadow-lg ring-1 ring-black/5 transition duration-300 ease-out focus:outline-none data-closed:scale-95 data-closed:opacity-0"
+          className="w-48 origin-top-right rounded-xl border border-white/10 bg-black/30   backdrop-blur-sm p-1 text-sm text-white shadow-lg ring-1 ring-black/5 transition duration-300 ease-out focus:outline-none data-closed:scale-95 data-closed:opacity-0"
         >
           {items.map((item, index) => (
             <MenuItem key={index}>

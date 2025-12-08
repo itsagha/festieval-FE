@@ -42,7 +42,7 @@ export default function page() {
             setField("name", val);
             console.log("isi zustand:", useCreateEventStore.getState().data);
           }}
-          className="p-3 text-gray-600 text-sm bg-white rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-primary"
+          className="p-3 text-sm bg-walnut border border-white/10 rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-primary"
           required
         />
       </div>
@@ -59,7 +59,7 @@ export default function page() {
             setField("description", val);
             console.log("isi zustand:", useCreateEventStore.getState().data);
           }}
-          className="p-3 text-gray-600 text-sm bg-white rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-primary"
+          className="p-3 text-sm bg-walnut border border-white/10 rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-primary"
           required
         />
       </div>

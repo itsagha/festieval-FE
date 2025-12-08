@@ -42,7 +42,7 @@ export default function RegisterModal({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      variantBG="bg-[#4c4c4c]"
+      variantBG="bg-black border border-primary"
       title={
         step === 1
           ? "Buat akun baru"

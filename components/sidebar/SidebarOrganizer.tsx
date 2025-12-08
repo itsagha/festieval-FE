@@ -32,7 +32,7 @@ export default function SidebarOrganizer() {
   }
 
   return (
-    <aside className="fixed left-0 top-0 w-64 bg-walnut shadow rounded-xl p-4 h-screen hidden md:block">
+    <aside className="fixed left-0 top-0 w-64 bg-walnut shadow p-4 h-screen hidden md:block">
 
       {/* info user */}
       <div className="flex justify-between rounded-xl bg-primary p-4">
@@ -64,10 +64,8 @@ export default function SidebarOrganizer() {
 
         {/* Akun */}
         <p className="my-4">Akun</p>
-        <li className="flex justify-start gap-3 items-center hover:bg-primary hover:text-walnut rounded-l-xl py-2 px-1 duration-700 cursor-pointer">
-          <Info size={20}/>
-          Informasi Dasar
-        </li>
+        <NavItem href="/organizer/account/basic-information" icon={Info} label="Informasi Dasar" />
+
 
         <li className="flex justify-start gap-3 items-center hover:bg-primary hover:text-walnut rounded-l-xl py-2 px-1 duration-700 cursor-pointer">
           <Settings size={20}/>
@@ -79,10 +77,7 @@ export default function SidebarOrganizer() {
           Informasi Legal
         </li>
 
-        <li className="flex justify-start gap-3 items-center hover:bg-primary hover:text-walnut rounded-l-xl py-2 px-1 duration-700 cursor-pointer">
-          <Banknote size={20}/>
-          Rekening
-        </li>
+        <NavItem href="/organizer/account/bank-account" icon={Banknote} label="Rekening" />
 
         {/* Mode user */}
         <p className="my-4">Mode User</p>

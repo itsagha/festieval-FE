@@ -18,7 +18,7 @@ export default function NavItem({ href, icon: Icon, label }: NavItemProps) {
   return (
     <Link
       href={href}
-      className={`flex justify-start gap-3 items-center rounded-l-xl py-2 px-1 duration-700
+      className={`flex justify-start gap-3 items-center rounded-xl p-2 duration-700
         ${isActive 
           ? "bg-primary text-walnut" 
           : "hover:bg-primary hover:text-walnut text-gray-400"
