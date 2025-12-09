@@ -17,7 +17,7 @@ export default function AccountPage() {
   ];
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-6">
       <h1 className="font-bold text-3xl">Rekening Anda</h1>
       <div className="h-0.5 w-full rounded-full bg-gray-400"></div>
 

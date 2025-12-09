@@ -54,10 +54,7 @@ export default function SidebarOrganizer() {
 
         <NavItem href="/organizer/event/myEvent" icon={List} label="Event Saya" />
 
-        <li className="flex justify-start gap-3 items-center hover:bg-primary hover:text-walnut rounded-l-xl py-2 px-1 duration-700 cursor-pointer">
-          <KeyRound size={20}/>
-          Kelola Akses
-        </li>
+        <NavItem href="/organizer/account/manage-access" icon={KeyRound} label="Kelola Akses" />
 
         {/* Garis */}
         <div className="h-0.5 w-full bg-gray-400/30 rounded-full my-4"></div>
@@ -66,27 +63,20 @@ export default function SidebarOrganizer() {
         <p className="my-4">Akun</p>
         <NavItem href="/organizer/account/basic-information" icon={Info} label="Informasi Dasar" />
 
+        <NavItem href="/organizer/account/settings" icon={Settings} label="Pengaturan" />
 
-        <li className="flex justify-start gap-3 items-center hover:bg-primary hover:text-walnut rounded-l-xl py-2 px-1 duration-700 cursor-pointer">
-          <Settings size={20}/>
-          Pengaturan
-        </li>
+        <NavItem href="/organizer/account/legal-information" icon={Info} label="Informasi Legal" />
 
-        <li className="flex justify-start gap-3 items-center hover:bg-primary hover:text-walnut rounded-l-xl py-2 px-1 duration-700 cursor-pointer">
-          <Cookie size={20}/>
-          Informasi Legal
-        </li>
-
-        <NavItem href="/organizer/account/bank-account" icon={Banknote} label="Rekening" />
+        <NavItem href="/organizer/account/bank-account" icon={Cookie} label="Rekening" />
 
         {/* Mode user */}
         <p className="my-4">Mode User</p>
-        <button className="flex justify-start gap-3 w-full items-center hover:bg-primary hover:text-walnut rounded-l-xl py-2 px-1 duration-700 cursor-pointer" onClick={handleSwitchRole} disabled={isSwitching}>
+        <button className="flex justify-start gap-3 w-full items-center hover:bg-primary hover:text-walnut rounded-xl p-2 duration-700 cursor-pointer" onClick={handleSwitchRole} disabled={isSwitching}>
           <ArrowLeftRight size={20}/>
           {isSwitching ? "Mengganti Role..." : "Beralih Akun Pembeli"}
         </button>
         {/* logout */}
-        <button className="flex justify-start gap-3 items-center hover:text-danger duration-700 cursor-pointer p-1" onClick={logoutUser}>
+        <button className="flex justify-start gap-3 items-center hover:text-danger duration-700 cursor-pointer p-2" onClick={logoutUser}>
           <LogOut size={20}/>
           Keluar
         </button>
