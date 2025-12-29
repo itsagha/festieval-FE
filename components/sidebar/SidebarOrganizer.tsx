@@ -65,9 +65,9 @@ export default function SidebarOrganizer() {
 
         <NavItem href="/organizer/account/settings" icon={Settings} label="Pengaturan" />
 
-        <NavItem href="/organizer/account/legal-information" icon={Info} label="Informasi Legal" />
+        <NavItem href="/organizer/account/legal-information" icon={Cookie} label="Informasi Legal" />
 
-        <NavItem href="/organizer/account/bank-account" icon={Cookie} label="Rekening" />
+        <NavItem href="/organizer/account/bank-account" icon={Banknote} label="Rekening" />
 
         {/* Mode user */}
         <p className="my-4">Mode User</p>
