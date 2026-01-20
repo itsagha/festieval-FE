@@ -17,7 +17,7 @@ export default function ContactPersonSection() {
           placeholder="Masukkan Nama Narahubung"
           value={contactPerson}
           onChange={(e) => setContactPerson(e.target.value)}
-          className="p-3 text-gray-600 text-sm bg-white rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-primary"
+          className="p-3 text-white text-sm bg-walnut border border-white/10 rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-primary"
           required
           />
       </div>
@@ -30,7 +30,7 @@ export default function ContactPersonSection() {
           placeholder="Masukkan Email Narahubung"
           value={emailCP}
           onChange={(e) => setEmailCP(e.target.value)}
-          className="p-3 text-gray-600 text-sm bg-white rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-primary"
+          className="p-3 text-white text-sm bg-walnut border border-white/10 rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-primary"
           required
           />
       </div>
@@ -39,7 +39,7 @@ export default function ContactPersonSection() {
       <div>
         <h3 className='font-semibold mb-2'>No. Ponsel</h3>
         <div className="flex items-center justify-between gap-2">
-          <div className="rounded-lg text-gray-600 p-3 bg-white text-sm">
+          <div className="rounded-lg p-3 text-white text-sm bg-walnut border border-white/10">
             <p>+62</p>
           </div>
           <input
@@ -47,7 +47,7 @@ export default function ContactPersonSection() {
             placeholder="81234567890"
             value={numberCP}
             onChange={(e) => setNumberCP(e.target.value)}
-            className="p-3 text-gray-600 text-sm bg-white rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-primary"
+            className="p-3 text-white text-sm bg-walnut border border-white/10 rounded-lg w-full focus:outline-none focus:ring-1 focus:ring-primary"
             required
             />
         </div>

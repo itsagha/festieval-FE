@@ -14,6 +14,16 @@ export default function page() {
   const user = useAuthStore((state) => state.user);
   const { data, setField } = useCreateEventStore();
 
+  // tipe event
+  type EventType = "one-time" | "tour";
+  const [eventType, setEventType] = useState<EventType>("one-time");
+
+  // state array Multiple tour stops
+  interface TourStop {
+    id: number;
+  }
+  const [tourStops, setTourStops] = useState<TourStop[]>([]);
+  
   const [eventName, setEventName] = useState(data.name);
   const [eventDesc, setEventDesc] = useState(data.description);
   const [selectedCategoryLabel, setSelectedCategoryLabel] = useState<string | null>(null);
@@ -22,6 +32,33 @@ export default function page() {
   return (
     <div className="flex flex-col gap-6">
       <h1 className="font-bold text-xl md:text-3xl">Lengkapi Data Acara</h1>
+      {/* pilih jenis event */}
+      <div className="flex gap-4">
+        <Button
+          onClick={() => setEventType("one-time")}
+          className={`w-full rounded-xl font-semibold transition
+            ${
+              eventType === "one-time"
+                ? "bg-primary text-black"
+                : "text-gray-300 border border-white/20"
+            }`}
+        >
+          One-time Event
+        </Button>
+
+        <Button
+          onClick={() => setEventType("tour")}
+          className={`w-full rounded-xl font-semibold transition
+            ${
+              eventType === "tour"
+                ? "bg-primary text-black"
+                : "text-gray-300 border border-white/20"
+            }`}
+        >
+          Tour
+        </Button>
+      </div>
+
       <button className="flex flex-col gap-2 items-center bg-white w-full py-40 text-gray-400 rounded-lg cursor-pointer">
         <CirclePlus />
         Tambahkan gambar/poster/banner
@@ -89,22 +126,69 @@ export default function page() {
         </div>
       </div>
 
-      {/* tempat tanggal waktu */}
-      <div className='flex justify-between items-center gap-2 mb-10'>
-        {/* pilih tanggal */}
-        <Button className='bg-white text-gray-400 flex items-center justify-center gap-2 w-full' onClick={() => setDateModalOpen(true)}>
-          <Calendar />
-          Pilih Waktu
-        </Button>
-        {/* modal date time picker */}
-        <DateTimeModal isOpen={dateModalOpen} onClose={() => setDateModalOpen(false)} />
+      {/* tombol tambah tour stop, tempat tanggal waktu buat tour event */}
+      {eventType === "tour" && (
+        <div className="flex flex-col gap-4 mt-4">
+          {tourStops.map((stop, index) => (
+            <div
+              key={stop.id}
+              className="bg-walnut border border-white/10 rounded-xl p-4 flex flex-col gap-3"
+            >
+              <h4 className="font-semibold">
+                Tour Stop {index + 1}
+              </h4>
+              <Button
+                className="bg-white text-gray-400 flex items-center justify-center gap-2"
+                onClick={() => setDateModalOpen(true)}
+              >
+                <Calendar />
+                Tambahkan Tanggal & Waktu
+              </Button>
 
-        {/* pilih lokasi */}
-        <Button className='bg-white text-gray-400 flex items-center justify-center gap-2 w-full'>
-          <MapPin />
-          Pilih Lokasi
-        </Button>
-      </div>
+              <Button className="bg-white text-gray-400 flex items-center justify-center gap-2">
+                <MapPin />
+                Tambahkan Lokasi
+              </Button>
+            </div>
+          ))}
+
+          {/* button tambhain tour stops */}
+          <button
+            className="flex justify-start gap-2 text-white cursor-pointer"
+            onClick={() =>
+              setTourStops((prev) => [...prev, { id: Date.now() }])
+            }
+          >
+            <CirclePlus />
+            Tambahkan Tour Stop
+          </button>
+        </div>
+      )}
+
+
+      {/* tempat tanggal waktu buat one-tome event */}
+      {eventType === "one-time" && (
+        <div className='flex justify-between items-center gap-2 mb-10'>
+          <Button
+            className='bg-white text-gray-400 flex items-center justify-center gap-2 w-full'
+            onClick={() => setDateModalOpen(true)}
+          >
+            <Calendar />
+            Pilih Waktu
+          </Button>
+
+          <DateTimeModal
+            isOpen={dateModalOpen}
+            onClose={() => setDateModalOpen(false)}
+          />
+
+          <Button className='bg-white text-gray-400 flex items-center justify-center gap-2 w-full'>
+            <MapPin />
+            Pilih Lokasi
+          </Button>
+        </div>
+      )}
+
 
       <Link href="/organizer/event/tickets">
         <Button className="bg-primary text-black w-full">

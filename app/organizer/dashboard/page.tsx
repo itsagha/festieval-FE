@@ -1,4 +1,5 @@
 import { ClipboardList, File, Dock, Ticket, Database, UsersRound } from "lucide-react"
+import DashboardDoughnutChart from "@/components/organizer/DashboardDoughnutChart";
 
 const cards = [
   {
@@ -46,22 +47,22 @@ export default function page() {
       <div className="h-0.5 w-full rounded-full bg-gray-400"></div>
 
       {/* GRID RESPONSIVE */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
         {cards.map((card, i) => (
           <div
             key={i}
-            className="bg-walnut border border-primary rounded-2xl p-6 hover:scale-101 duration-500 hover:shadow-[0_0_20px_var(--tw-shadow-color)] hover:shadow-primary"
+            className="bg-walnut border border-primary rounded-2xl md:p-6 p-2 hover:scale-101 duration-500 hover:shadow-[0_0_20px_var(--tw-shadow-color)] hover:shadow-primary"
           >
             <div className="flex justify-between items-center">
-              <p className="text-sm flex font-semibold justify-start items-center gap-2">{card.icon}{card.title}</p>
+              <p className="md:text-base text-xs flex font-semibold justify-start items-center gap-2">{card.icon}{card.title}</p>
             </div>
 
             {/* garis */}
             <div className="h-0.5 w-full rounded-full bg-gray-400/30 my-2"></div>
-            <p className="text-gray-400 text-sm">Total</p>
+            <p className="text-gray-400 md:text-sm text-xs">Total</p>
             <div className="flex justify-between items-end">
-              <h2 className="text-2xl md:text-5xl font-bold mt-4">{card.value}</h2>
-              <p className="text-gray-400 text-sm">{card.unit}</p>
+              <h2 className="text-sm md:text-base lg:text-5xl font-bold mt-4">{card.value}</h2>
+              <p className="text-gray-400 md:text-sm text-xs">{card.unit}</p>
             </div>
           </div>
         ))}

@@ -18,7 +18,7 @@ export default function OrganizerLayout({ children }: { children: React.ReactNod
       <SidebarOrganizer />
 
       {/* Content */}
-      <main className="m-0 md:ml-64 flex-1 mx-auto py-8 px-6">
+      <main className="m-0 sm:mb-32 md:ml-64 flex-1 mx-auto py-8 px-6">
         {children}
       </main>
     </div>

@@ -122,3 +122,10 @@ body {
 .animate-slideDown {
   animation: slideDown 0.25s ease-in-out forwards;
 }
+
+/* hide tombol arrow di input type number */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

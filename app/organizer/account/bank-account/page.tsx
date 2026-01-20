@@ -35,28 +35,28 @@ export default function AccountPage() {
       </div>
 
       {/* Input lainnya */}
-      <h3 className='font-semibold mb-1'>Nama Pemilik Rekening</h3>
+      <h3 className='font-semibold'>Nama Pemilik Rekening</h3>
       <input
         type="text"
         placeholder="Nama Pemilik Rekening"
         className="bg-walnut border border-white/10 p-3 rounded-xl focus:outline-none text-sm focus:ring-1 focus:ring-primary"
       />
 
-      <h3 className='font-semibold mb-1'>Nomor Rekening</h3>
+      <h3 className='font-semibold'>Nomor Rekening</h3>
       <input
         type="number"
         placeholder="Nomor Rekening"
         className="bg-walnut border border-white/10 p-3 rounded-xl focus:outline-none text-sm focus:ring-1 focus:ring-primary"
       />
 
-      <h3 className='font-semibold mb-1'>Kantor Cabang</h3>
+      <h3 className='font-semibold'>Kantor Cabang</h3>
       <input
         type="text"
         placeholder="Kantor Cabang"
         className="bg-walnut border border-white/10 p-3 rounded-xl focus:outline-none text-sm focus:ring-1 focus:ring-primary"
       />
 
-      <h3 className='font-semibold mb-1'>Kota</h3>
+      <h3 className='font-semibold'>Kota</h3>
       <input
         type="text"
         placeholder="Kota"
